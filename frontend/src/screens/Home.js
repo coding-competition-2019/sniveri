@@ -1,9 +1,13 @@
 import React from 'react';
+import SearchForm from "../components/SearchForm";
 
 export default function Home () {
+	const style = {
+
+	};
 	return <div>
 		<Header />
-		<SearchForm></SearchForm>
+		<SearchForm/>
 	</div>;
 }
 
