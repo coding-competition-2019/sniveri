@@ -30,6 +30,9 @@ class DataApplicationTests {
 	@Test
 	void contextLoads() throws Exception{
 
+
+
+		/*
 		String filename = "src/main/resources/updated_places.json";
 		File file = new File(filename);
 
@@ -56,7 +59,7 @@ class DataApplicationTests {
 			placeEntity.setActivities(activities[0]);
 
 			System.out.println(placeRepository.save(placeEntity).getId());
-		});
+		});*/
 	}
 
 	void printAsJSON(Object object) {

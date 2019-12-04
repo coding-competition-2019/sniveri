@@ -25,6 +25,7 @@ public class TestController {
 
     @GetMapping("/get/{id}")
     public @ResponseBody PlaceEntity getObject(@PathVariable("id") Long id){
+        System.out.println("hledám id "+id);
         return repository.findById(id).get();
     }
 
@@ -46,10 +47,21 @@ public class TestController {
     @GetMapping("/getAllByLoc")
     public @ResponseBody List<PlaceEntity> getAll(@RequestParam Double longitude, @RequestParam Double latitude, @RequestParam Double distance, @RequestParam String[] activities){
         List<PlaceEntity> awal =  repository.findAll();
-        List<PlaceEntity> vysl = new ArrayList<PlaceEntity>();
+        List<PlaceEntity> vysl = new ArrayList<>();
         for (PlaceEntity entity: awal) {
             if(distanceOfTwoPlacesInKm(entity.getLatitude(), entity.getLongitude(), latitude, longitude) <= distance){
-                vysl.add(entity);
+                String[] act = entity.getActivities().split(",");
+                boolean is = false;
+                for(int i=0;i<act.length;i++){
+                    for(int j=0;j<activities.length;i++){
+                        if(act[i] == activities[j]){
+                            is = true;
+                        }
+                    }
+                }
+                if(is){
+                    vysl.add(entity);
+                }
             }
         }
         return vysl;
