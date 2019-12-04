@@ -1,7 +1,4 @@
-/* eslint-disable */
-import React, { useReducer } from 'react';
-import produce from 'immer';
-import Chip from '@material-ui/core/Chip';
+import React, {useContext} from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {
 	Slider,
@@ -9,21 +6,7 @@ import {
 	TextField
 } from "@material-ui/core";
 
-function formReducer (state, action) {
-	console.log(action);
-	switch (action.type) {
-		case 'CHANGE_ACTIVITY':
-			return produce(state, state => {
-				state.activities = action.value;
-			});
-		case 'CHANGE_RADIUS':
-			return produce(state, state => {
-				state.radius = action.value;
-			});
-		default:
-			return state;
-	}
-}
+import FilterContext from '../misc/StateContext';
 
 
 const activities = [
@@ -32,9 +15,7 @@ const activities = [
 ];
 
 export default function SearchForm () {
-	const initialState = {};
-	const [state, dispatch] = useReducer(formReducer, initialState);
-	// radius + aktivita
+	const [ { filter: state }, dispatch] = useContext(FilterContext);
 	const onActivityChange = (e, value) => {
 		dispatch({
 			type: 'CHANGE_ACTIVITY',
@@ -48,18 +29,27 @@ export default function SearchForm () {
 		});
 	};
 
-	return <div>
-		<Typography id='radius-slider-label' gutterBottom>Distance radius</Typography>
-		<Slider
-			defaultValue={20}
-			aria-labelledby="radius-slider-label"
-			valueLabelDisplay="auto"
-			step={1}
-			marks
-			min={0}
-			max={50}
-			onChange={onRadiusChange}
-		/>
+	return <div style={{
+		display: 'flex',
+		flexDirection: 'column',
+		width: '90%',
+		margin: 'auto',
+	}}>
+		<div style={{
+			flex: 1,
+		}}>
+			<Typography id='radius-slider-label' gutterBottom>Distance radius (km)</Typography>
+			<Slider
+				value={state.radius}
+				aria-labelledby="radius-slider-label"
+				valueLabelDisplay="auto"
+				step={1}
+				marks
+				min={0}
+				max={50}
+				onChange={onRadiusChange}
+			/>
+		</div>
 		<Autocomplete
 			multiple
 			//id="tags-standard"
@@ -75,6 +65,7 @@ export default function SearchForm () {
 				/>
 			)}
 			onChange={onActivityChange}
+			value={state.activities}
 		/>
 	</div>;
 }
