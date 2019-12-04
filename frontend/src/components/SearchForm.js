@@ -38,7 +38,7 @@ export default function SearchForm (props) {
 		<div>
 			<div style={{
 				borderRadius: '5px',
-				padding: '20px',
+				padding: '0 20px 20px',
 				background: 'white',
 				margin: '10px',
 				boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.15)'

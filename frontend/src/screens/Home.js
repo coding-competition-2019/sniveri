@@ -19,7 +19,8 @@ export default function Home () {
 				location: coords,
 			});
 		},null, {
-			enableHighAccuracy: true
+			enableHighAccuracy: true,
+			maximumAge: 2000
 		});
 
 		(async function() {
@@ -68,7 +69,7 @@ export default function Home () {
 			width: '100%',
 		}}>
 				<SearchForm/>
-				<List />
+				<List/>
 		</div>
 	</div>;
 }
@@ -81,6 +82,7 @@ function Header () {
 		position: 'absolute',
 		top: '15px',
 		left: '15px',
-		borderRadius: '50px'
-	}}>Our Great App</div>
+		borderRadius: '50px',
+		fontWeight: '700'
+	}}>Not Google maps</div>
 }

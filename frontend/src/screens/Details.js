@@ -11,7 +11,6 @@ import StateContext from '../misc/StateContext';
 
 const useStyles = makeStyles(theme => ({
 	root: {
-		margin: '8px',
 		display: 'flex',
 		flexDirection: 'column',
 	},
@@ -32,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 		justifyContent: 'space-around',
 		'> * ': {
 			flex: 1,
-			fontSize: '80px',
+			fontSize: '70px',
 		},
 		//fontSize: '25px',
 		marginTop: '30px',
@@ -41,14 +40,19 @@ const useStyles = makeStyles(theme => ({
 		textDecoration: 'none',
 	},
 	img: {
+		height: '250px',
+		objectFit: 'cover',
 		width: '100%',
 		maxWidth: '600px',
 		margin: 'auto',
-		marginBottom: '50px',
+		marginBottom: '10px',
 		borderRadius: '3px',
 	},
+	main: {
+		padding: '20px'
+	},
 	actHeader: {
-		marginTop: '40px'
+		margin: '30px 0 10px'
 	},
 	addressLine: {
 		display: 'flex',
@@ -126,30 +130,32 @@ export default function Details () {
 
 	return <div className={styles.root}>
 		<img src={place.img.url} alt={place.img.alt} className={styles.img}/>
-		<Typography variant='h3'>{place.name}</Typography>
+		<div className={styles.main}>
+			<Typography variant='h4'>{place.name}</Typography>
 
-		<div className={styles.addressLine}>
-			<Typography component='address'>{formatAddress(place.address)}</Typography> <Typography>({place.distance} away)</Typography>
-		</div>
+			<div className={styles.addressLine}>
+				<Typography component='address'>{formatAddress(place.address)}</Typography> <Typography>({place.distance} away)</Typography>
+			</div>
 
-		<Typography variant='h4' className={styles.actHeader}>Provided activities</Typography>
-		<div className={styles.chipContainer} style={{
-			width: '100%',
-			display: 'flex',
-			flexDirection: 'row',
-		}}>
-			{showAllActivities || activities.length <= MAX_ACT_DEFAULT ? activities :
-				[...activities.slice(0, MAX_ACT_DEFAULT-1), <Chip variant='outlined' key={-1} label='...' onClick={toggleShowAllActivities} />]
-			}
-		</div>
-		<div className={styles.buttonDiv}>
-			<Button variant='outlined' color='primary'><Icon className={styles.icon}>share</Icon> Share</Button>
-			<a className={styles.link} href={directionsUrl}>
-				<Button variant='outlined' color='primary'>
-					<Icon className={styles.icon}>directions</Icon>
-					Navigate
-				</Button>
-			</a>
+			<Typography variant='h5' className={styles.actHeader}>Provided activities</Typography>
+			<div className={styles.chipContainer} style={{
+				width: '100%',
+				display: 'flex',
+				flexDirection: 'row',
+			}}>
+				{showAllActivities || activities.length <= MAX_ACT_DEFAULT ? activities :
+					[...activities.slice(0, MAX_ACT_DEFAULT-1), <Chip variant='outlined' key={-1} label='...' onClick={toggleShowAllActivities} />]
+				}
+			</div>
+			<div className={styles.buttonDiv}>
+				<Button variant='outlined' color='primary'><Icon className={styles.icon}>share</Icon> Share</Button>
+				<a className={styles.link} href={directionsUrl}>
+					<Button variant='outlined' color='primary'>
+						<Icon className={styles.icon}>directions</Icon>
+						Navigate
+					</Button>
+				</a>
+			</div>
 		</div>
 	</div>;
 }
