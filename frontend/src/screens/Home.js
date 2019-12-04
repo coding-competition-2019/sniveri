@@ -19,7 +19,8 @@ export default function Home () {
 				location: coords,
 			});
 		},null, {
-			enableHighAccuracy: true
+			enableHighAccuracy: true,
+			maximumAge: 2000
 		});
 
 		(async function() {
