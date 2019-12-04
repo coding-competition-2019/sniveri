@@ -11,6 +11,7 @@ import StateContext from '../misc/StateContext';
 
 const useStyles = makeStyles(theme => ({
 	root: {
+		margin: '8px',
 		display: 'flex',
 		flexDirection: 'column',
 	},
@@ -48,7 +49,13 @@ const useStyles = makeStyles(theme => ({
 	},
 	actHeader: {
 		marginTop: '40px'
-	}
+	},
+	addressLine: {
+		display: 'flex',
+		'& :nth-child(1)': {
+			marginRight: '0.7ch',
+		},
+	},
 }));
 
 const formatAddress = ({street, zipCode, city}) => `${street}, ${zipCode} ${city}`;
@@ -119,9 +126,11 @@ export default function Details () {
 
 	return <div className={styles.root}>
 		<img src={place.img.url} alt={place.img.alt} className={styles.img}/>
-
 		<Typography variant='h3'>{place.name}</Typography>
-		<Typography component='address'>{formatAddress(place.address)}</Typography> <Typography>({place.distance} away)</Typography>
+
+		<div className={styles.addressLine}>
+			<Typography component='address'>{formatAddress(place.address)}</Typography> <Typography>({place.distance} away)</Typography>
+		</div>
 
 		<Typography variant='h4' className={styles.actHeader}>Provided activities</Typography>
 		<div className={styles.chipContainer} style={{
