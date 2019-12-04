@@ -30,10 +30,14 @@ const activities = [
 	'volleyball',
 ];
 
+const containerStyle = {
+	display: 'flex',
+	flexDirection: 'column',
+};
+
 export default function SearchForm () {
 	const initialState = {};
 	const [state, dispatch] = useReducer(formReducer, initialState);
-	// radius + aktivita
 	const onActivityChange = (e, value) => {
 		dispatch({
 			type: 'CHANGE_ACTIVITY',
@@ -47,18 +51,27 @@ export default function SearchForm () {
 		});
 	};
 
-	return <div>
-		<Typography id='radius-slider-label' gutterBottom>Distance radius</Typography>
-		<Slider
-			defaultValue={20}
-			aria-labelledby="radius-slider-label"
-			valueLabelDisplay="auto"
-			step={1}
-			marks
-			min={0}
-			max={50}
-			onChange={onRadiusChange}
-		/>
+	return <div style={{
+		display: 'flex',
+		flexDirection: 'column',
+		width: '90%',
+		margin: 'auto',
+	}}>
+		<div style={{
+			flex: 1,
+		}}>
+			<Typography id='radius-slider-label' gutterBottom>Distance radius (km)</Typography>
+			<Slider
+				defaultValue={20}
+				aria-labelledby="radius-slider-label"
+				valueLabelDisplay="auto"
+				step={1}
+				marks
+				min={0}
+				max={50}
+				onChange={onRadiusChange}
+			/>
+		</div>
 		<Autocomplete
 			multiple
 			//id="tags-standard"
