@@ -1,4 +1,6 @@
 import React, { useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
 import SearchForm from "../components/SearchForm";
 import FilterContext from "../misc/StateContext";
@@ -21,20 +23,24 @@ export default function Home () {
 		});
 	});
 
-	const style = {
-
-	};
-  
-	return <div>
+	return <div style={{
+		position: 'relative',
+		height: '100vh',
+		width: '100vw'
+	}}>
 		<Header />
 		<Map center={state.userLocation}/>
-		<SearchForm/>
+		<SearchForm />
 	</div>;
 }
 
 function Header () {
-	const style = {
-
-	};
-	return <div style={style}>Logo</div>
+	return <div style={{
+		padding: '10px 15px',
+		background: 'white',
+		position: 'absolute',
+		top: '15px',
+		left: '15px',
+		borderRadius: '50px'
+	}}>Our Great App</div>
 }

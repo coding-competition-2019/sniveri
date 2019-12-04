@@ -1,72 +1,53 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import ButtonBase from '@material-ui/core/ButtonBase'
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Chip from '@material-ui/core/Chip';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    margin: '20px 0'
   },
   paper: {
-    padding: theme.spacing(2),
-    margin: 'auto',
-    maxWidth: 500
-  },
-  image: {
-    width: 128,
-    height: 128
-  },
-  img: {
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%'
+    color: theme.palette.text.secondary,
+    padding: 0,
+    maxHeight: 300,
+    textAlign: 'left',
+    borderRadius: 30
   }
-}))
+}));
 
-export default function ComplexGrid() {
-  const classes = useStyles()
+export default function ListItem({ name, address, activities }) {
+  const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <Grid container>
-          <Grid item>
-            <ButtonBase className={classes.image}>
-              <img
-                className={classes.img}
-                alt="complex"
-                src="https://www.fitfuture.cz/wp-content/uploads/2018/09/38029558_2099363863658667_7964592795425964032_n.jpg"
-              />
-            </ButtonBase>
-          </Grid>
-          <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={2}>
-              <Grid item xs>
-                <Typography gutterBottom variant="subtitle1">
-                  Standard license
-                </Typography>
-                <Typography variant="body2" gutterBottom>
-                  Full resolution 1920x1080 • JPEG
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  ID: 1030114
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                  Remove
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid item>
-              <Typography variant="subtitle1">$19.00</Typography>
-            </Grid>
-          </Grid>
+    <Paper className={classes.root}>
+      <Grid container style={{ maxHeight: 300 }}>
+        <Grid item xs={5} p={0}>
+            <img
+              src="https://www.fitfuture.cz/wp-content/uploads/2018/09/38029558_2099363863658667_7964592795425964032_n.jpg"
+              alt="place"
+              style={{ maxWidth: '100%', maxHeight: '100%' }}
+            ></img>
         </Grid>
-      </Paper>
-    </div>
-  )
+        <Grid item xs={7} style={{ textAlign: 'left', padding: 20 }}>
+          <h4>{name}</h4>
+          {activities.slice(0, 3).map(activity => (
+            <Chip label={activity} style={{ margin: 2 }} />
+          ))}
+          <p style={{ fontSize: 12 }}>
+            {`${address.street}, ${address.city}, ${address.zipCode}`}
+          </p>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div> 3.5 km</div>
+            <Button variant="outlined" color="primary">
+              share
+            </Button>
+          </div>
+        </Grid>
+      </Grid>
+    </Paper>
+  );
 }

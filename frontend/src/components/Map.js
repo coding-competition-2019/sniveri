@@ -17,7 +17,19 @@ export default function Map(x) {
           defaultCenter={center}
           defaultZoom={16}
       >
+        <currentIcon
+          lat={59.955413}
+          lng={30.337844}
+        />
       </GoogleMapReact>
     </div>
   )
 };
+
+const currentIcon = () => <div style={{
+  content: '',
+  display: 'block',
+  width: '10px',
+  height: '10px',
+  background: 'red'
+}}></div>
