@@ -3,10 +3,11 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import {
 	Slider,
 	Typography,
-	TextField
+	TextField,
+	Button,
 } from "@material-ui/core";
 
-import FilterContext from '../misc/StateContext';
+import StateContext from '../misc/StateContext';
 
 
 const activities = [
@@ -14,8 +15,13 @@ const activities = [
 	'volleyball',
 ];
 
-export default function SearchForm () {
-	const [ { filter: state }, dispatch] = useContext(FilterContext);
+/**
+ * @param props
+ * @param {function} props.onSubmit
+ * @param {boolean} [props.renderButtons=false]
+ */
+export default function SearchForm (props) {
+	const [ { filter: state }, dispatch] = useContext(StateContext);
 	const onActivityChange = (e, value) => {
 		dispatch({
 			type: 'CHANGE_ACTIVITY',
