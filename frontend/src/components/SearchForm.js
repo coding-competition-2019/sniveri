@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useReducer } from 'react';
 import produce from 'immer';
 import Chip from '@material-ui/core/Chip';

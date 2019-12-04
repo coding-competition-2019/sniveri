@@ -1,5 +1,7 @@
+/* eslint-disable */
 import React from 'react';
 import SearchForm from "../components/SearchForm";
+import Map from '../components/Map';
 
 export default function Home () {
 	const style = {
@@ -7,6 +9,7 @@ export default function Home () {
   };
   
 	return <div>
+		<Map/>
 		<Header />
 		<SearchForm/>
 	</div>;
