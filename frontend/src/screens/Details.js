@@ -1,13 +1,14 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState,useEffect} from 'react';
 import {
-	Typography,
-	Chip,
-	makeStyles,
-	Button,
-	Icon,
+		Typography,
+		Chip,
+		makeStyles,
+		Button,
+		Icon, CircularProgress,
 } from "@material-ui/core";
 
 import StateContext from '../misc/StateContext';
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -63,8 +64,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const formatAddress = ({street, zipCode, city}) => `${street}, ${zipCode} ${city}`;
-
-export default function Details () {
 	const place = {
 		img: {
 			url: 'https://picsum.photos/600/300',
@@ -107,6 +106,18 @@ export default function Details () {
 	};
 	// can delete all the above once data is recvd from backend
 
+export default function Details () {
+	const [ { userLocation } ] = useContext(StateContext);
+
+	const [ fst, sfst ] = useState(null);
+
+		useEffect(() => {
+				//axios.get('/').then(({ data }) => {
+						let data = place;
+						sfst(data);
+				//});
+		}, []);
+
 	const styles = useStyles();
 
 
@@ -118,7 +129,6 @@ export default function Details () {
 	const [ showAllActivities, setShowAllActivities ] = useState(false);
 	const toggleShowAllActivities = () => setShowAllActivities(!showAllActivities);
 
-	const [ { userLocation } ] = useContext(StateContext); // TODO: where to navigate from?
 
 
 	const dirParams = Object.entries({
@@ -127,6 +137,8 @@ export default function Details () {
 		destination: `${place.coords.lat},${place.coords.lng}`
 	}).reduce((prev, [k, v]) => `${prev}&${k}=${v}`, '');
 	const directionsUrl = `https://www.google.com/maps/dir/?api=1${dirParams}`;
+
+	if (!fst) return <div style={{display:'flex', width: '100%' , marginTop: '30px' }}><CircularProgress style={{margin:'auto'}} /></div>;
 
 	return <div className={styles.root}>
 		<img src={place.img.url} alt={place.img.alt} className={styles.img}/>
