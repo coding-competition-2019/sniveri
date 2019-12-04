@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 
 import StateContext from '../misc/StateContext';
+import SharePlaceModal from '../components/SharePlaceModal';
 import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
@@ -63,63 +64,61 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
+const place = {
+				img: {
+								url: 'https://picsum.photos/600/300',
+								alt: 'image',
+				},
+				distance: '3.5km',
+				"name": "AFIT Fitness Centrum",
+				"url": "https://www.activepass.cz/partner/afit-fitness-centrum",
+				"address": {
+								"street": "Táborská 157",
+								"zipCode": "61500",
+								"city": "Brno"
+				},
+				coords: {
+								lat: '50',
+								lng: '49',
+				},
+				"activities": [
+								"bosu",
+								"body and mind",
+								"pilates",
+								"spinning (indoor cycling)",
+								"h.e.a.t.",
+								"kardiozóna",
+								"posilovna",
+								"aerobic a jiné",
+								"fitness",
+								"power jóga – energy jóga",
+								"boot camp",
+								"core fitness",
+								"body pump",
+								"funkční trénink",
+								"hard core tréninky",
+								"kettlebells",
+								"kruhové tréninky",
+								"flowin",
+								"open class lekce",
+								"trx"
+				]
+};
+
 const formatAddress = ({street, zipCode, city}) => `${street}, ${zipCode} ${city}`;
-	const place = {
-		img: {
-			url: 'https://picsum.photos/600/300',
-			alt: 'image',
-		},
-		distance: '3.5km',
-		"name": "AFIT Fitness Centrum",
-		"url": "https://www.activepass.cz/partner/afit-fitness-centrum",
-		"address": {
-			"street": "Táborská 157",
-			"zipCode": "61500",
-			"city": "Brno"
-		},
-		coords: {
-			lat: '50',
-			lng: '49',
-		},
-		"activities": [
-			"bosu",
-			"body and mind",
-			"pilates",
-			"spinning (indoor cycling)",
-			"h.e.a.t.",
-			"kardiozóna",
-			"posilovna",
-			"aerobic a jiné",
-			"fitness",
-			"power jóga – energy jóga",
-			"boot camp",
-			"core fitness",
-			"body pump",
-			"funkční trénink",
-			"hard core tréninky",
-			"kettlebells",
-			"kruhové tréninky",
-			"flowin",
-			"open class lekce",
-			"trx"
-		]
-	};
-	// can delete all the above once data is recvd from backend
 
 export default function Details () {
-	const [ { userLocation } ] = useContext(StateContext);
 
 	const [ fst, sfst ] = useState(null);
 
-		useEffect(() => {
-				//axios.get('/').then(({ data }) => {
-						let data = place;
-						sfst(data);
-				//});
-		}, []);
+                useEffect(() => {
+                                //axios.get('/').then(({ data }) => {
+                                                let data = place;
+                                                sfst(data);
+                                //});
+                }, []);
 
-	const styles = useStyles();
-
+        const styles = useStyles();
 
 	const activities = place.activities.map((str, i) => <Chip
 		variant='outlined'
@@ -129,6 +128,7 @@ export default function Details () {
 	const [ showAllActivities, setShowAllActivities ] = useState(false);
 	const toggleShowAllActivities = () => setShowAllActivities(!showAllActivities);
 
+	const [ { userLocation } ] = useContext(StateContext); // TODO: where to navigate from?
 
 
 	const dirParams = Object.entries({
@@ -160,7 +160,7 @@ export default function Details () {
 				}
 			</div>
 			<div className={styles.buttonDiv}>
-				<Button variant='outlined' color='primary'><Icon className={styles.icon}>share</Icon> Share</Button>
+				<SharePlaceModal {...place} />
 				<Button variant='outlined' color='primary'>URL</Button>
 				<a className={styles.link} href={directionsUrl}>
 					<Button variant='outlined' color='primary'>
