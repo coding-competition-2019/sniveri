@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-
 }
 
 .App-logo {
@@ -26,3 +25,13 @@
   overflow-x: hidden;
 }
 
+.share-place-icon {
+  margin-right: 5px;
+  transition: all .3s;
+}
+
+.share-place-icon:hover {
+  background-color: #eee;
+  cursor: pointer;
+  border-radius: 5px;
+}

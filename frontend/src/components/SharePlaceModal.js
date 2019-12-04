@@ -34,13 +34,13 @@ export default function SimpleModal({ name }) {
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
 
-  const handleOpen = (e) => {
+  const handleOpen = e => {
     e.stopPropagation();
     e.preventDefault();
     setOpen(true);
   };
 
-  const handleClose = (e) => {
+  const handleClose = e => {
     e.stopPropagation();
     e.preventDefault();
     setOpen(false);
@@ -64,8 +64,9 @@ export default function SimpleModal({ name }) {
         aria-describedby="simple-modal-description"
         open={open}
         onClose={handleClose}
+        onClick={e => e.stopPropagation()}
       >
-        <div>
+        <div style={{}}>
           <div style={modalStyle} className={classes.paper}>
             <h2 id="simple-modal-title">
               Share place {name} with your friends
@@ -74,6 +75,36 @@ export default function SimpleModal({ name }) {
               Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
             </p>
             <SharePlaceForm friends={friends} />
+            <div
+              style={{
+                margin: '30px 0 20px 10px',
+                width: 250,
+                display: 'flex',
+                justifyContent: 'space-between'
+              }}
+            >
+              <div style={{ padding: 13 }} className="share-place-icon">
+                <img
+                  src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Messenger_colored_svg-512.png"
+                  alt="messenger"
+                  style={{ width: 60 }}
+                ></img>
+              </div>
+              <div style={{ padding: 13 }} className="share-place-icon">
+                <img
+                  src="http://icons.iconarchive.com/icons/dtafalonso/android-l/512/WhatsApp-icon.png"
+                  alt="messenger"
+                  style={{ width: 60 }}
+                ></img>
+              </div>
+              <div style={{ padding: 13 }} className="share-place-icon">
+                <img
+                  src="https://cdn4.iconfinder.com/data/icons/chat-messages-1/128/Chat_Messages_sms_mobile_phone-512.png"
+                  alt="messenger"
+                  style={{ width: 60 }}
+                ></img>
+              </div>
+            </div>
           </div>
         </div>
       </Modal>

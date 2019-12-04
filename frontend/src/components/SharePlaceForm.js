@@ -16,7 +16,7 @@ export default function SharePlaceForm({ friends }) {
           <Chip label={option} {...getTagProps({ index })} />
         ))
       }
-      style={{ width: 500 }}
+      style={{ width: '80%' }}
       renderInput={params => (
         <TextField
           {...params}
