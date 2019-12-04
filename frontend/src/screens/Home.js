@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from 'react';
+import axios from 'axios';
 
 import SearchForm from "../components/SearchForm";
 import FilterContext from "../misc/StateContext";
@@ -20,8 +21,38 @@ export default function Home () {
 		},null, {
 			enableHighAccuracy: true
 		});
-		
-		
+
+		(async function() {
+			try {
+				// const {data} = axios.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${}`')
+				const data = [
+					{
+						"name": "AIKIDO klub Praha",
+						"url": "https://www.activepass.cz/partner/aikido-klub-praha",
+						"address": {
+							"street": "Karlovo náměstí 293/13",
+							"zipCode": "12000",
+							"city": "Praha 2"
+						},
+						"activities": ["aikido"]
+					},
+					{
+						"name": "Amande wine wellness hotel",
+						"url": "https://www.activepass.cz/partner/amande-wine-wellness-hotel",
+						"address": {
+							"street": "Husova 8",
+							"zipCode": "69301",
+							"city": "Hustopeče"
+						},
+						"activities": ["kuželky"]
+					}
+				]
+
+			} catch(err) {
+				console.log(err)
+			}
+		})()
+			
 	});
 
 	return <div style={{

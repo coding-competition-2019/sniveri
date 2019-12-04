@@ -4,7 +4,6 @@ import {
 	Slider,
 	Typography,
 	TextField,
-	Button,
 } from "@material-ui/core";
 
 import StateContext from '../misc/StateContext';
