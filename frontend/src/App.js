@@ -13,23 +13,27 @@ import Home from './screens/Home';
 import List from './screens/List';
 import Details from './screens/Details';
 
-import FilterContext from './misc/FilterContext';
+import FilterContext from './misc/StateContext';
 
 function filterFormReducer (state, action) {
 	console.log(action);
 	switch (action.type) {
 		case 'CHANGE_ACTIVITY':
 			return produce(state, state => {
-				state.activities = action.value;
+				state.filter.activities = action.value;
 			});
 		case 'CHANGE_RADIUS':
 			return produce(state, state => {
-				state.radius = action.value;
+				state.filter.radius = action.value;
 			});
 		case 'CHANGE_LOCATION':
 			return produce(state, state => {
-				state.location = '';
+				state.filter.location = '';
 				// TODO
+			});
+		case 'GET_USER_LOCATION':
+			return produce(state, state => {
+				state.userLocation = action.location;
 			});
 		default:
 			return state;
@@ -37,9 +41,12 @@ function filterFormReducer (state, action) {
 }
 
 const initialFilterState = {
-	radius: 30,
-	activities: [],
-	location: '',
+	filter: {
+		radius: 30,
+		activities: [],
+		location: '',
+	},
+	userLocation: {}, // TODO
 };
 
 function App() {

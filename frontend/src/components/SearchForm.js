@@ -6,7 +6,7 @@ import {
 	TextField
 } from "@material-ui/core";
 
-import FilterContext from '../misc/FilterContext';
+import FilterContext from '../misc/StateContext';
 
 
 const activities = [
@@ -15,7 +15,7 @@ const activities = [
 ];
 
 export default function SearchForm () {
-	const [state, dispatch] = useContext(FilterContext);
+	const [ { filter: state }, dispatch] = useContext(FilterContext);
 	const onActivityChange = (e, value) => {
 		dispatch({
 			type: 'CHANGE_ACTIVITY',
