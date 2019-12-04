@@ -108,8 +108,9 @@ export default function SimpleModal({ name }) {
                     justifyContent: 'space-between'
                   }}
                 >
-                  {iconsToShare.map(iconSrc => (
+                  {iconsToShare.map((iconSrc,i) => (
                     <div
+                        key={i}
                       style={{ padding: 13 }}
                       className="share-place-icon"
                       onClick={handleSubmit}
