@@ -1,4 +1,4 @@
-{
+ export default {
   "places": [
     {
       "name": "16KA Bulldog Gym",
