@@ -56,7 +56,7 @@ export default function ListItem(props) {
           }}
         >
           <img
-            src="https://www.fitfuture.cz/wp-content/uploads/2018/09/38029558_2099363863658667_7964592795425964032_n.jpg"
+            src={`https://picsum.photos/600/400?get=${id}`}
             alt="place"
             style={{ maxWidth: '100%', maxHeight: '100%', margin: 'auto' }}
           ></img>
