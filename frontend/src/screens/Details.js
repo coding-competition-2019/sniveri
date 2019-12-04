@@ -149,6 +149,7 @@ export default function Details () {
 			</div>
 			<div className={styles.buttonDiv}>
 				<Button variant='outlined' color='primary'><Icon className={styles.icon}>share</Icon> Share</Button>
+				<Button variant='outlined' color='primary'>URL</Button>
 				<a className={styles.link} href={directionsUrl}>
 					<Button variant='outlined' color='primary'>
 						<Icon className={styles.icon}>directions</Icon>
