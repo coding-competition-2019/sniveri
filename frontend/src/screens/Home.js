@@ -52,7 +52,7 @@ export default function Home () {
 				console.log(err)
 			}
 		})()
-			
+
 	});
 
 	return <div style={{
@@ -62,8 +62,14 @@ export default function Home () {
 	}}>
 		<Header />
 		<Map center={state.userLocation}/>
-		<SearchForm/>
-		<List />
+		<div style={{
+			position: 'absolute',
+			top: '50vh',
+			width: '100%',
+		}}>
+				<SearchForm/>
+				<List />
+		</div>
 	</div>;
 }
 
