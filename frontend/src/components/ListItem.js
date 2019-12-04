@@ -58,9 +58,24 @@ export default function ListItem({ name, address, activities }) {
           <p style={{ fontSize: 12 }}>
             {`${address.street}, ${address.city}, ${address.zipCode}`}
           </p>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 20 }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginTop: 20
+            }}
+          >
             <div> 3.5 km</div>
             <Button variant="outlined" color="primary">
+              <Icon
+                style={{
+                  fontSize: '20px',
+                  marginRight: '5px'
+                }}
+              >
+                share
+              </Icon>{' '}
               Share
             </Button>
           </div>
