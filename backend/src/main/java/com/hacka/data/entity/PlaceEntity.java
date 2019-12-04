@@ -31,4 +31,10 @@ public class PlaceEntity {
 
     @Column(name = "activities")
     private String activities;
+
+    @Column(name = "longitude")
+    private Double longitude;
+
+    @Column(name = "latitude")
+    private Double latitude;
 }
