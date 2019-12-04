@@ -18,14 +18,16 @@ export default function Home () {
 				type: 'GET_USER_LOCATION',
 				location: coords,
 			});
-		},null, {
-			enableHighAccuracy: true,
-			maximumAge: 2000
-		});
-
-		(async function() {
+			(async function() {
 			try {
-				// const {data} = axios.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${}`')
+				const x = {
+						activities: state.filter.activities,
+						lat: coords.latitude,
+						lng: coords.longitude,
+						radius: state.filter.radius,
+				};
+				console.log(x);
+					//const {data} = await axios.post('', x);
 				const data = [
 					{
 						"name": "AIKIDO klub Praha",
@@ -48,15 +50,23 @@ export default function Home () {
 						"activities": ["kuželky"]
 					}
 				]
+					setTimeout(() => {
 					dispatch({
 							type: 'STORE_PLACES',
 							places: data,
 					});
+					}, 1000)
 
 			} catch(err) {
 				console.log(err)
 			}
 		})()
+		},null, {
+			enableHighAccuracy: true,
+			maximumAge: 2000
+		});
+
+
 
 	}, []);
 

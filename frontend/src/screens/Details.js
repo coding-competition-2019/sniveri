@@ -1,14 +1,15 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState,useEffect} from 'react';
 import {
-	Typography,
-	Chip,
-	makeStyles,
-	Button,
-	Icon,
+		Typography,
+		Chip,
+		makeStyles,
+		Button,
+		Icon, CircularProgress,
 } from "@material-ui/core";
 
 import StateContext from '../misc/StateContext';
 import SharePlaceModal from '../components/SharePlaceModal';
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -63,53 +64,61 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
+const place = {
+				img: {
+								url: 'https://picsum.photos/600/300',
+								alt: 'image',
+				},
+				distance: '3.5km',
+				"name": "AFIT Fitness Centrum",
+				"url": "https://www.activepass.cz/partner/afit-fitness-centrum",
+				"address": {
+								"street": "Táborská 157",
+								"zipCode": "61500",
+								"city": "Brno"
+				},
+				coords: {
+								lat: '50',
+								lng: '49',
+				},
+				"activities": [
+								"bosu",
+								"body and mind",
+								"pilates",
+								"spinning (indoor cycling)",
+								"h.e.a.t.",
+								"kardiozóna",
+								"posilovna",
+								"aerobic a jiné",
+								"fitness",
+								"power jóga – energy jóga",
+								"boot camp",
+								"core fitness",
+								"body pump",
+								"funkční trénink",
+								"hard core tréninky",
+								"kettlebells",
+								"kruhové tréninky",
+								"flowin",
+								"open class lekce",
+								"trx"
+				]
+};
+
 const formatAddress = ({street, zipCode, city}) => `${street}, ${zipCode} ${city}`;
 
 export default function Details () {
-	const place = {
-		img: {
-			url: 'https://picsum.photos/600/300',
-			alt: 'image',
-		},
-		distance: '3.5km',
-		"name": "AFIT Fitness Centrum",
-		"url": "https://www.activepass.cz/partner/afit-fitness-centrum",
-		"address": {
-			"street": "Táborská 157",
-			"zipCode": "61500",
-			"city": "Brno"
-		},
-		coords: {
-			lat: '50',
-			lng: '49',
-		},
-		"activities": [
-			"bosu",
-			"body and mind",
-			"pilates",
-			"spinning (indoor cycling)",
-			"h.e.a.t.",
-			"kardiozóna",
-			"posilovna",
-			"aerobic a jiné",
-			"fitness",
-			"power jóga – energy jóga",
-			"boot camp",
-			"core fitness",
-			"body pump",
-			"funkční trénink",
-			"hard core tréninky",
-			"kettlebells",
-			"kruhové tréninky",
-			"flowin",
-			"open class lekce",
-			"trx"
-		]
-	};
-	// can delete all the above once data is recvd from backend
 
-	const styles = useStyles();
+	const [ fst, sfst ] = useState(null);
 
+                useEffect(() => {
+                                //axios.get('/').then(({ data }) => {
+                                                let data = place;
+                                                sfst(data);
+                                //});
+                }, []);
+
+        const styles = useStyles();
 
 	const activities = place.activities.map((str, i) => <Chip
 		variant='outlined'
@@ -128,6 +137,8 @@ export default function Details () {
 		destination: `${place.coords.lat},${place.coords.lng}`
 	}).reduce((prev, [k, v]) => `${prev}&${k}=${v}`, '');
 	const directionsUrl = `https://www.google.com/maps/dir/?api=1${dirParams}`;
+
+	if (!fst) return <div style={{display:'flex', width: '100%' , marginTop: '30px' }}><CircularProgress style={{margin:'auto'}} /></div>;
 
 	return <div className={styles.root}>
 		<img src={place.img.url} alt={place.img.alt} className={styles.img}/>
