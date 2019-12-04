@@ -1,11 +1,11 @@
 import React, { useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core';
 
 import SearchForm from "../components/SearchForm";
 import FilterContext from "../misc/StateContext";
 
 import Map from '../components/Map';
+import {Link} from 'react-router-dom';
+import {Button} from '@material-ui/core'
 
 export default function Home () {
 
@@ -36,6 +36,7 @@ export default function Home () {
 
 function Header () {
 	return <div style={{
+		zIndex: 1,
 		padding: '10px 15px',
 		background: 'white',
 		position: 'absolute',
