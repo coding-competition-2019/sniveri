@@ -34,11 +34,15 @@ export default function SimpleModal({ name }) {
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
 
-  const handleOpen = () => {
+  const handleOpen = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
     setOpen(false);
   };
 

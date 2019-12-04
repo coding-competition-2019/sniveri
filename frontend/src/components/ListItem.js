@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import { Link }  from 'react-router-dom';
 import SharePlaceModal from '../components/SharePlaceModal';
 
 const useStyles = makeStyles(theme => ({
@@ -15,13 +16,22 @@ const useStyles = makeStyles(theme => ({
     maxHeight: 300,
     textAlign: 'left',
     borderRadius: 30
-  }
+  },
+  link: {
+    textDecoration: 'none',
+    '& :hover': {
+      backgroundColor: '#eee',
+    },
+  },
 }));
+
+let a = 0;
 
 export default function ListItem(props) {
   const classes = useStyles();
-  const { name, address } = props;
+  const { name, address, id = a++ } = props;
   return (
+    <Link to={`/details/${id}`} className={classes.link}>
     <Paper
       className={classes.root}
       style={{
@@ -70,5 +80,6 @@ export default function ListItem(props) {
         </Grid>
       </Grid>
     </Paper>
+    </Link>
   );
 }
