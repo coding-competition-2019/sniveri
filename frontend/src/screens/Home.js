@@ -3,6 +3,8 @@ import React, { useEffect, useContext } from 'react';
 import SearchForm from "../components/SearchForm";
 import FilterContext from "../misc/StateContext";
 
+import Map from '../components/Map';
+
 export default function Home () {
 
 	const [ state, dispatch ] = useContext(FilterContext);
@@ -12,22 +14,20 @@ export default function Home () {
 		navigator.geolocation.getCurrentPosition(({ coords }) => {
 			dispatch({
 				type: 'GET_USER_LOCATION',
-				/*location: {
-					lat: coords.latitude,
-					lng: coords.longitude,
-				},*/
 				location: coords,
 			});
+		},null, {
+			enableHighAccuracy: true
 		});
 	});
 
 	const style = {
 
-  };
+	};
   
 	return <div>
-		<Map/>
 		<Header />
+		<Map center={state.userLocation}/>
 		<SearchForm/>
 	</div>;
 }
