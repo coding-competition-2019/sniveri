@@ -35,11 +35,7 @@ export default function SearchForm (props) {
 	};
 
 	return(
-		<div style={{
-			position: 'absolute',
-			bottom: '20px',
-			width: '100%',
-		}}>
+		<div>
 			<div style={{
 				borderRadius: '5px',
 				padding: '20px',
