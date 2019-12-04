@@ -23,14 +23,23 @@ export default function ListItem({ name, address, activities }) {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.root}>
-      <Grid container style={{ maxHeight: 300 }}>
-        <Grid item xs={5} p={0}>
-            <img
-              src="https://www.fitfuture.cz/wp-content/uploads/2018/09/38029558_2099363863658667_7964592795425964032_n.jpg"
-              alt="place"
-              style={{ maxWidth: '100%', maxHeight: '100%' }}
-            ></img>
+    <Paper className={classes.root} style={{ height: 250, maxWidth: 600}}>
+      <Grid container>
+        <Grid
+          item
+          xs={5}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+          }}
+        >
+          <img
+            src="https://www.fitfuture.cz/wp-content/uploads/2018/09/38029558_2099363863658667_7964592795425964032_n.jpg"
+            alt="place"
+            style={{ maxWidth: '100%', maxHeight: '100%' }}
+          ></img>
         </Grid>
         <Grid item xs={7} style={{ textAlign: 'left', padding: 20 }}>
           <h4>{name}</h4>
