@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/service")
 public class TestController {
 
@@ -25,7 +26,8 @@ public class TestController {
 
     @GetMapping("/get/{id}")
     public @ResponseBody PlaceEntity getObject(@PathVariable("id") Long id){
-        System.out.println("hledám id "+id);
+        System.out.println("hledám id "+id
+        );
         return repository.findById(id).get();
     }
 
@@ -45,22 +47,33 @@ public class TestController {
     }
 
     @GetMapping("/getAllByLoc")
-    public @ResponseBody List<PlaceEntity> getAll(@RequestParam Double longitude, @RequestParam Double latitude, @RequestParam Double distance, @RequestParam String[] activities){
+    public @ResponseBody List<PlaceEntity> getAllByLoc(@RequestParam("longitude") Double longitude, @RequestParam("latitude") Double latitude, @RequestParam("distance") Double distance, @RequestParam(required = false) String[] activities){
         List<PlaceEntity> awal =  repository.findAll();
         List<PlaceEntity> vysl = new ArrayList<>();
         for (PlaceEntity entity: awal) {
-            if(distanceOfTwoPlacesInKm(entity.getLatitude(), entity.getLongitude(), latitude, longitude) <= distance){
-                String[] act = entity.getActivities().split(",");
-                boolean is = false;
-                for(int i=0;i<act.length;i++){
-                    for(int j=0;j<activities.length;i++){
-                        if(act[i] == activities[j]){
-                            is = true;
+            if(entity.getLatitude()!=null&& entity.getLongitude()!=null) {
+                if (distanceOfTwoPlacesInKm(entity.getLatitude(), entity.getLongitude(), latitude, longitude) <= distance) {
+                    entity.setDistance(distanceOfTwoPlacesInKm(entity.getLatitude(), entity.getLongitude(), latitude, longitude));
+                    if (activities != null && activities.length != 0) {
+                        if (entity.getActivities() != null && entity.getActivities() != "") {
+                            String[] act = entity.getActivities().split(",");
+                            boolean is = false;
+                            if (act != null && act.length != 0) {
+                                for (int i = 0; i < act.length; i++) {
+                                    for (int j = 0; j < activities.length; i++) {
+                                        if (act[i] == activities[j]) {
+                                            is = true;
+                                        }
+                                    }
+                                }
+                                if (is) {
+                                    vysl.add(entity);
+                                }
+                            }
                         }
+                    } else {
+                        vysl.add(entity);
                     }
-                }
-                if(is){
-                    vysl.add(entity);
                 }
             }
         }

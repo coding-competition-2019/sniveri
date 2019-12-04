@@ -37,4 +37,6 @@ public class PlaceEntity {
 
     @Column(name = "latitude")
     private Double latitude;
+
+    private Double distance;
 }
