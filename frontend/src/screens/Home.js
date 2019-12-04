@@ -4,8 +4,7 @@ import SearchForm from "../components/SearchForm";
 import FilterContext from "../misc/StateContext";
 
 import Map from '../components/Map';
-import {Link} from 'react-router-dom';
-import {Button} from '@material-ui/core'
+import List from './List'
 
 export default function Home () {
 
@@ -21,6 +20,8 @@ export default function Home () {
 		},null, {
 			enableHighAccuracy: true
 		});
+		
+		
 	});
 
 	return <div style={{
@@ -30,7 +31,8 @@ export default function Home () {
 	}}>
 		<Header />
 		<Map center={state.userLocation}/>
-		<SearchForm />
+		<SearchForm/>
+		<List />
 	</div>;
 }
 
