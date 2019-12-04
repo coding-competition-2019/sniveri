@@ -78,7 +78,6 @@ export default function SimpleModal({ name }) {
             <div
               style={{
                 margin: '30px 0 20px 10px',
-                padding: 10,
                 width: 250,
                 display: 'flex',
                 justifyContent: 'space-between'
