@@ -35,6 +35,10 @@ function filterFormReducer (state, action) {
 			return produce(state, state => {
 				state.userLocation = action.location;
 			});
+		case 'STORE_PLACES':
+			return produce(state, state => {
+					state.places = action.places;
+			});
 		default:
 			return state;
 	}
@@ -47,6 +51,7 @@ const initialFilterState = {
 		location: '',
 	},
 	userLocation: {}, // TODO
+	places: [],
 };
 
 function App() {

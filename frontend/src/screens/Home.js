@@ -48,6 +48,10 @@ export default function Home () {
 						"activities": ["kuželky"]
 					}
 				]
+					dispatch({
+							type: 'STORE_PLACES',
+							places: data,
+					});
 
 			} catch(err) {
 				console.log(err)
