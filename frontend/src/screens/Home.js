@@ -1,4 +1,6 @@
 import React, { useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
 
 import SearchForm from "../components/SearchForm";
@@ -22,19 +24,22 @@ export default function Home () {
 		});
 	});
 
-	const style = {
-
-  };
-  
 	return <div>
 		<Header />
-		<SearchForm/>
+		<SearchForm />
+		<Link to='/list'>
+			<Button
+				variant='contained'
+				color='primary'
+			>
+				Search
+			</Button>
+		</Link>
 	</div>;
 }
 
 function Header () {
-	const style = {
-
-	};
-	return <div style={style}>Logo</div>
+	return <div style={{
+		height: '40px',
+	}}>Our Great App</div>
 }
