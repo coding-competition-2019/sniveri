@@ -22,13 +22,20 @@ export default function Home () {
 			try {
 				const x = {
 						activities: state.filter.activities,
-						lat: coords.latitude,
-						lng: coords.longitude,
-						radius: state.filter.radius,
+						latitude: coords.latitude,
+						longitude: coords.longitude,
+						distance: state.filter.radius,
 				};
 				console.log(x);
-					//const {data} = await axios.post('', x);
-				const data = [
+					//const {data} = await axios.get('http://localhost:9090/service/getAllByLoc', x);
+					const qs = '';
+
+					const {data} = await axios({
+							url: 'http://10.4.115.73:9090/service/getAllByLoc',
+							method: 'get',
+							params: x
+					});
+				/*const data = [
 					{
 						"name": "AIKIDO klub Praha",
 						"url": "https://www.activepass.cz/partner/aikido-klub-praha",
@@ -49,7 +56,8 @@ export default function Home () {
 						},
 						"activities": ["kuželky"]
 					}
-				]
+				]*/
+				console.log(data)
 					setTimeout(() => {
 					dispatch({
 							type: 'STORE_PLACES',
