@@ -26,7 +26,7 @@ public class AddressEntity {
     private String street;
 
     @NotNull
-    @Column(name = "zipCode")
+    @Column(name = "zip_code")
     private String zipCode;
 
     @NotNull

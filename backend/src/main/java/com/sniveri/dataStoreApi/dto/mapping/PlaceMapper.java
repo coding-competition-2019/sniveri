@@ -4,7 +4,7 @@ import com.sniveri.dataStoreApi.dto.PlaceDTO;
 import com.sniveri.dataStoreApi.entities.PlaceEntity;
 import org.mapstruct.Mapper;
 
-@Mapper(uses = {ActivityMapper.class, AddressMapper.class})
+@Mapper
 public interface PlaceMapper {
     PlaceEntity fromDTO(PlaceDTO placeDTO);
     PlaceDTO toDTO(PlaceEntity placeEntity);

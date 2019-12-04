@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -24,4 +25,7 @@ public class ActivityEntity {
     @NotNull
     @Column(name = "activity")
     private String activity;
+
+    @ManyToMany(mappedBy = "activities")
+    private Set<PlaceEntity> place;
 }

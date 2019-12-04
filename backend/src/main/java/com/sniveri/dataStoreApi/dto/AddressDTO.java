@@ -10,6 +10,7 @@ import lombok.Setter;
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AddressDTO {
+    private Long id;
     private String street;
     private String zipCode;
     private String city;
