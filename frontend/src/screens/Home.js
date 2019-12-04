@@ -1,10 +1,10 @@
 import React, { useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core';
-
 
 import SearchForm from "../components/SearchForm";
 import FilterContext from "../misc/StateContext";
+
+import Map from '../components/Map';
+import List from './List'
 
 export default function Home () {
 
@@ -15,31 +15,35 @@ export default function Home () {
 		navigator.geolocation.getCurrentPosition(({ coords }) => {
 			dispatch({
 				type: 'GET_USER_LOCATION',
-				/*location: {
-					lat: coords.latitude,
-					lng: coords.longitude,
-				},*/
 				location: coords,
 			});
+		},null, {
+			enableHighAccuracy: true
 		});
+		
+		
 	});
 
-	return <div>
+	return <div style={{
+		position: 'relative',
+		height: '100vh',
+		width: '100vw'
+	}}>
 		<Header />
-		<SearchForm />
-		<Link to='/list'>
-			<Button
-				variant='contained'
-				color='primary'
-			>
-				Search
-			</Button>
-		</Link>
+		<Map center={state.userLocation}/>
+		<SearchForm/>
+		<List />
 	</div>;
 }
 
 function Header () {
 	return <div style={{
-		height: '40px',
+		zIndex: 1,
+		padding: '10px 15px',
+		background: 'white',
+		position: 'absolute',
+		top: '15px',
+		left: '15px',
+		borderRadius: '50px'
 	}}>Our Great App</div>
 }

@@ -35,43 +35,48 @@ export default function SearchForm (props) {
 		});
 	};
 
-	return <div style={{
-		display: 'flex',
-		flexDirection: 'column',
-		width: '90%',
-		margin: 'auto',
-	}}>
+	return(
 		<div style={{
-			flex: 1,
+			position: 'absolute',
+			bottom: '20px',
+			width: '100%',
 		}}>
-			<Typography id='radius-slider-label' gutterBottom>Distance radius (km)</Typography>
-			<Slider
-				value={state.radius}
-				aria-labelledby="radius-slider-label"
-				valueLabelDisplay="auto"
-				step={1}
-				marks
-				min={0}
-				max={50}
-				onChange={onRadiusChange}
-			/>
-		</div>
-		<Autocomplete
-			multiple
-			//id="tags-standard"
-			options={activities}
-			getOptionLabel={option => option}
-			renderInput={params => (
-				<TextField
-					{...params}
-					variant="standard"
-					label="Activities"
-					margin="normal"
-					fullWidth
+			<div style={{
+				borderRadius: '5px',
+				padding: '20px',
+				background: 'white',
+				margin: '10px',
+				boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.15)'
+			}}>
+				<Autocomplete
+					multiple
+					//id="tags-standard"
+					options={activities}
+					getOptionLabel={option => option}
+					renderInput={params => (
+						<TextField
+							{...params}
+							variant="standard"
+							label="Activities"
+							margin="normal"
+							fullWidth
+						/>
+					)}
+					onChange={onActivityChange}
+					value={state.activities}
 				/>
-			)}
-			onChange={onActivityChange}
-			value={state.activities}
-		/>
-	</div>;
+				<Typography id='radius-slider-label' gutterBottom>Distance radius (km)</Typography>
+				<Slider
+					value={state.radius}
+					aria-labelledby="radius-slider-label"
+					valueLabelDisplay="auto"
+					step={1}
+					marks
+					min={0}
+					max={50}
+					onChange={onRadiusChange}
+				/>
+			</div>
+		</div>
+	)
 }
