@@ -1,6 +1,6 @@
-package com.sniveri.dataStoreApi.repositories;
+package com.hacka.data.repository;
 
-import com.sniveri.dataStoreApi.entities.PlaceEntity;
+import com.hacka.data.entity.PlaceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

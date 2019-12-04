@@ -1,2 +1,2 @@
 cd target
-java -jar dataStoreApi-0.0.1-SNAPSHOT.jar
+java -jar data-0.0.1-SNAPSHOT.jar
