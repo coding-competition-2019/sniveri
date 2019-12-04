@@ -29,7 +29,7 @@ let a = 0;
 
 export default function ListItem(props) {
   const classes = useStyles();
-  const { name, address, id = a++ } = props;
+  const { name, address, distance, id = a++ } = props;
   return (
     <Link to={`/details/${id}`} className={classes.link}>
     <Paper
@@ -64,7 +64,7 @@ export default function ListItem(props) {
         <Grid item xs={7} style={{ textAlign: 'left', padding: 20 }}>
           <h4>{name}</h4>
           <p style={{ fontSize: 12 }}>
-            {`${address.street}, ${address.city}, ${address.zipCode}`}
+              {address}
           </p>
           <div
             style={{
@@ -74,7 +74,7 @@ export default function ListItem(props) {
               marginTop: 20
             }}
           >
-            <div>3.5 km</div>
+            <div>{distance} km</div>
             <SharePlaceModal {...props} />
           </div>
         </Grid>

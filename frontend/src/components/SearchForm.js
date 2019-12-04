@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Slider, Typography, TextField } from '@material-ui/core';
 
 import StateContext from '../misc/StateContext';
+import Axios from "axios";
 
 const activities = ['tennis', 'volleyball'];
 
@@ -13,13 +14,27 @@ const activities = ['tennis', 'volleyball'];
  */
 
 export default function SearchForm(props) {
-  const [{ filter: state }, dispatch] = useContext(StateContext);
+  const [ state , dispatch] = useContext(StateContext);
 
   const sendRequest = async () => {
-    console.log('d' + state);
+    //console.log('d' + state);
     try {
+
+				const x = {
+						activities: state.filter.activities || [],
+						latitude: state.userLocation.latitude,
+						longitude: state.userLocation.longitude,
+						distance: state.filter.radius,
+				};
       // const {data} = axios.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${}`')
-      const data = [
+      const {data} = await Axios({
+							url: 'http://10.4.82.116:9090/service/getAllByLoc',
+							//url: 'http://10.4.82.116:9090/service/getAllByLoc?' + qs,
+							//url:
+							method: 'get',
+							params: x
+					});
+      /*const data = [
         {
           name: 'AIKIDO klub Praha',
           url: 'https://www.activepass.cz/partner/aikido-klub-praha',
@@ -40,7 +55,7 @@ export default function SearchForm(props) {
           },
           activities: ['kuželky']
         }
-      ];
+      ];*/
       dispatch({
         type: 'STORE_PLACES',
         places: data
@@ -50,20 +65,24 @@ export default function SearchForm(props) {
     }
   };
 
-  const onActivityChange = (e, value) => {
-    dispatch({
+  const onActivityChange = async (e, value) => {
+    await dispatch({
       type: 'CHANGE_ACTIVITY',
       value
     });
-    sendRequest();
   };
   const onRadiusChange = (e, value) => {
     dispatch({
       type: 'CHANGE_RADIUS',
       value
     });
-    sendRequest();
   };
+
+  useEffect(() => {
+    if(state) {
+      sendRequest()
+    }
+  })
 
   return (
     <div>
@@ -91,13 +110,13 @@ export default function SearchForm(props) {
             />
           )}
           onChange={onActivityChange}
-          value={state.activities}
+          value={state.filter.activities}
         />
         <Typography id="radius-slider-label" gutterBottom>
           Distance radius (km)
         </Typography>
         <Slider
-          value={state.radius}
+          value={state.filter.radius}
           aria-labelledby="radius-slider-label"
           valueLabelDisplay="auto"
           step={1}

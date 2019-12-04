@@ -20,7 +20,7 @@ export default function Map(x) {
       width: '100vw',
       height: '100vh'
     }}>
-      {/* <GoogleMapReact
+      <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyBkDk5yFzmi2Nn14YKZI_tjTLuNaN27gUs' }}
           defaultCenter={center}
           defaultZoom={18}
@@ -37,7 +37,7 @@ export default function Map(x) {
             lng={i.lng}
           />
         )}
-      </GoogleMapReact> */}
+      </GoogleMapReact>
     </div>
   )
 };

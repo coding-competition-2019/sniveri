@@ -46,7 +46,7 @@ function filterFormReducer (state, action) {
 
 const initialFilterState = {
 	filter: {
-		radius: 30,
+		radius: 1,
 		activities: [],
 		location: '',
 	},

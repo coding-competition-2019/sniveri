@@ -21,17 +21,24 @@ export default function Home () {
 			(async function() {
 			try {
 				const x = {
-						activities: state.filter.activities,
+						activities: state.filter.activities || [],
 						latitude: coords.latitude,
 						longitude: coords.longitude,
 						distance: state.filter.radius,
 				};
+				//if (!x.activities || !x.activities.length) x.activities = ['zoo'];
+
 				console.log(x);
 					//const {data} = await axios.get('http://localhost:9090/service/getAllByLoc', x);
-					const qs = '';
+					/*let qs = '';
+					Object.entries(x).forEach(([k,v]) => {
+							qs += `&${k}=${v}`;
+					});*/
 
 					const {data} = await axios({
-							url: 'http://10.4.115.73:9090/service/getAllByLoc',
+							url: 'http://10.4.82.116:9090/service/getAllByLoc',
+							//url: 'http://10.4.82.116:9090/service/getAllByLoc?' + qs,
+							//url:
 							method: 'get',
 							params: x
 					});

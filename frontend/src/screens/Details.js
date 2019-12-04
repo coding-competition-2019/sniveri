@@ -106,6 +106,7 @@ const place = {
 };
 
 const formatAddress = ({street, zipCode, city}) => `${street}, ${zipCode} ${city}`;
+//const formatAddress = a => a;
 
 export default function Details () {
 
@@ -130,7 +131,7 @@ export default function Details () {
 
 	const [ { userLocation } ] = useContext(StateContext); // TODO: where to navigate from?
 
-
+//debugger
 	const dirParams = Object.entries({
 		// see https://developers.google.com/maps/documentation/urls/guide#parameters_1
 		origin: `${userLocation.latitude},${userLocation.longitude}`,
