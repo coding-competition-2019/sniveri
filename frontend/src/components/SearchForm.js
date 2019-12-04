@@ -1,6 +1,4 @@
-import React, { useReducer } from 'react';
-import produce from 'immer';
-import Chip from '@material-ui/core/Chip';
+import React, {useContext} from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {
 	Slider,
@@ -8,21 +6,7 @@ import {
 	TextField
 } from "@material-ui/core";
 
-function formReducer (state, action) {
-	console.log(action);
-	switch (action.type) {
-		case 'CHANGE_ACTIVITY':
-			return produce(state, state => {
-				state.activities = action.value;
-			});
-		case 'CHANGE_RADIUS':
-			return produce(state, state => {
-				state.radius = action.value;
-			});
-		default:
-			return state;
-	}
-}
+import FilterContext from '../misc/FilterContext';
 
 
 const activities = [
@@ -30,14 +14,8 @@ const activities = [
 	'volleyball',
 ];
 
-const containerStyle = {
-	display: 'flex',
-	flexDirection: 'column',
-};
-
 export default function SearchForm () {
-	const initialState = {};
-	const [state, dispatch] = useReducer(formReducer, initialState);
+	const [state, dispatch] = useContext(FilterContext);
 	const onActivityChange = (e, value) => {
 		dispatch({
 			type: 'CHANGE_ACTIVITY',
@@ -62,7 +40,7 @@ export default function SearchForm () {
 		}}>
 			<Typography id='radius-slider-label' gutterBottom>Distance radius (km)</Typography>
 			<Slider
-				defaultValue={20}
+				value={state.radius}
 				aria-labelledby="radius-slider-label"
 				valueLabelDisplay="auto"
 				step={1}
@@ -87,6 +65,7 @@ export default function SearchForm () {
 				/>
 			)}
 			onChange={onActivityChange}
+			value={state.activities}
 		/>
 	</div>;
 }
