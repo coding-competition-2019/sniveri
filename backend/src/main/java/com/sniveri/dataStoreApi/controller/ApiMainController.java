@@ -1,4 +1,4 @@
-package controller;
+package com.sniveri.dataStoreApi.controller;
 
 import org.springframework.web.bind.annotation.*;
 
