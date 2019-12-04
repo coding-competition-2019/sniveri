@@ -2,14 +2,12 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-// import Chip from '@material-ui/core/Chip';
-import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
+import SharePlaceModal from '../components/SharePlaceModal';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    margin: 15
+    margin: 20,
   },
   paper: {
     color: theme.palette.text.secondary,
@@ -20,9 +18,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ListItem({ name, address, activities }) {
+export default function ListItem(props) {
   const classes = useStyles();
-
+  const { name, address } = props;
   return (
     <Paper
       className={classes.root}
@@ -31,7 +29,7 @@ export default function ListItem({ name, address, activities }) {
         maxWidth: 600,
         display: 'flex',
         alignItems: 'items',
-        borderRadius: '5px'
+        borderRadius: '5px',
       }}
       elevation={5}
     >
@@ -66,18 +64,8 @@ export default function ListItem({ name, address, activities }) {
               marginTop: 20
             }}
           >
-            <div> 3.5 km</div>
-            <Button variant="outlined" color="primary">
-              <Icon
-                style={{
-                  fontSize: '20px',
-                  marginRight: '5px'
-                }}
-              >
-                share
-              </Icon>{' '}
-              Share
-            </Button>
+            <div>3.5 km</div>
+            <SharePlaceModal {...props} />
           </div>
         </Grid>
       </Grid>
